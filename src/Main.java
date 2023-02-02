@@ -1,27 +1,37 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        // Java Collections API
-        List<String> list = new LinkedList<>();
-        for (int i = 0; i < 50; i++) {
-            list.add("String -" + i);//mas[i] = i;
+        //Map структура вида key -> value
+        Map<Integer, String> cars = new HashMap<>();// Создание мапы вида , ключ - инты, значение - строки
+        // Пример: Хранение авто. Где их идентификатор является гос номером от 000 до 999
+        String[] carType = new String[] {"Audi", "Lada", "Porsche", "Reno", "Nissan", "Toyota"}; // Возможная база машин
+        Random random = new Random();
+        for (int i = 0; i < 5; i++) {
+            int j = random.nextInt(6);
+            cars.put(random.nextInt(999), carType[j]); // В ключ генерируем уникальный номер от 000 до 999.
+            // В значение вставляем одну из 6 вариантов авто
         }
-        System.out.println(list);//Arrays.toString(mas)
-        list.add(4,"New String"); // Добавление элемента на конкретное место
-        System.out.println(list.size());// Обратить внимание, что элементов теперь 51, а не 50
+        System.out.println(cars); // Пример вывода в консоль все мапы.
+        // Обратите внимание, что она обёрнута в {}, а не [] как массивы
 
-        System.out.println(list.get(5)); //mas[5]
-        System.out.println(list);
+        System.out.println(cars.size()); // Несмотря на особую структуру, подсчиатть эллементы всё-равно можно
+        cars.put(65, "Test");
+        System.out.println(cars);
+        cars.put(65, "Test2"); // При попытке записи Value с одним key, второй (новый), перезаписывает первый.
+        System.out.println(cars);
 
-        // Вариант прохода через коллекцию не отличается от массива
-        for (String s : list) {
-            System.out.println("Считываем элемент: " + s);
+        Collection<String> values = cars.values();// Для получения всех Value, используем метод values() по аналоги с enam
+        for (String s : values) {
+            System.out.println(s); // Далее можно использовать перебор как с коллекцией или массивом
         }
 
-        System.out.println(list.indexOf("String -5"));// Позволяет найти конкретный элемент и узнать его индекс
-        System.out.println(list.contains("String -5"));// Позволяет узнать, есть ли элемент в коллекции
+        cars.remove(65); // Можно удалять конкретные элементы
+        System.out.println(cars);
+
+        cars.isEmpty(); // Можно проверить на пустоту.
     }
 }
